@@ -24,7 +24,8 @@
                 @foreach ($models as $model)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $model->name }}</td>
+
+                        <td><a href="{{ route('models.show', ['id' => $model->id]) }}">{{ $model->name }}</a></td>
                         <td>
                             <form action="{{ route('models.destroy', ['id' => $model->id]) }}">
                                 <button type="submit">Usuń</button>

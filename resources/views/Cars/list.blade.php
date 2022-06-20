@@ -10,13 +10,7 @@
 
 <body>
     <div class="container">
-        <div>
-            <a href="{{ route('brands.list') }}">Marki</a>
-
-        </div>
-        <div>
-            <a href="{{ route('models.list') }}">Modele</a>
-        </div>
+        <a href="{{ route('cars.create') }}">Nowa pozycja</a>
 
         <h3>Samochody</h3>
         <div class="cars">
@@ -50,6 +44,7 @@
                         <th>Kolor</th>
                         <th>Cena</th>
                         <th>Szczegoly</th>
+                        <th>Edycja</th>
                         <th>Usuń</th>
                     </tr>
                 </thead>
@@ -65,8 +60,10 @@
                             <td>
                                 <a href="{{ route('cars.show', ['id' => $car->id]) }}">Zobacz</a>
                             </td>
+                            <td><a href="{{ route('cars.update', ['id' => $car->id]) }}">Edytuj</a></td>
                             <td>
-                                <form action="{{ route('cars.destroy', ['id' => $car->id]) }}" method="get">
+                                <form action={{ route('cars.destroy', ['id' => $car->id]) }} method="post">
+                                    @csrf
                                     <button type="submit">usuń</button>
                                 </form>
                             </td>

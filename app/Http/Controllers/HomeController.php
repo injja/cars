@@ -6,10 +6,9 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-   public function homePage()
+   public function homePage(Request $request)
    {
-    //    dump(2);
-    //    dd(1);
-       return view('home');
-    }
+      dd($request->user());
+      return view('home');
+   }
 }

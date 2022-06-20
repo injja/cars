@@ -5,6 +5,9 @@ namespace App\Exceptions;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Validation\ValidationException;
+
 class Handler extends ExceptionHandler
 {
     /**
@@ -46,5 +49,18 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+        if (($exception instanceof NotFoundHttpException || $exception instanceof ValidationException) && $this->requestExceptsJson($request)) {
+            return response()->json(['message' => $exception->getMessage()], 400);
+        }
+        return parent::render($request, $exception);
+    }
+
+    public function requestExceptsJson($request)
+    {
+        return $request->getContentType() == "json" || ($request->getContentType() == "form" && (bool)($request->header('authorization')));
     }
 }

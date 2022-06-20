@@ -11,6 +11,6 @@ class ModelsController extends Controller
     public function list()
     {
         $models = DB::table('models')->get();
-        return view('cars.models', ['models' => $models]);
+        return view('Cars.models', ['models' => $models]);
     }
 }

@@ -2,6 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Cars\ApiCarsController;
+use App\Http\Controllers\Cars\ApiCarController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +20,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::group(['prefix' => 'cars/'], function () {
+    Route::get('list', [ApiCarsController::class, 'list']);
+
+    Route::get('show/{id}', [ApiCarController::class, 'show']);
+    Route::post('create', [ApiCarController::class, 'create']);
+    Route::delete('destroy/{id}', [ApiCarController::class, 'destroy']);
+    Route::put('update/{id}', [ApiCarController::class, 'update']);
 });

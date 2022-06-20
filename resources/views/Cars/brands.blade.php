@@ -24,7 +24,8 @@
                     @foreach ($brands as $brand)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $brand->name }}</td>
+                            <td><a href="{{ route('brands.show', ['id' => $brand->id]) }}">{{ $brand->name }}</a>
+                            </td>
 
                             <td>
                                 <form action="{{ route('brands.destroy', ['id' => $brand->id]) }}" method="get">
